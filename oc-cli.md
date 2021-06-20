@@ -1066,11 +1066,11 @@ https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/h
 
 
 
-Resource Quota for the scope for a project
+**Resource Quota for the scope for a project**
 
 ```
 oc create quota dev-quota --hard services=10,cpu=1300,memory=1.5Gi
-oc describe quota
+oc describe quota dev-quota
 oc delete resourcequota QUOTA
 ```
 
@@ -1082,19 +1082,21 @@ oc delete resourcequota QUOTA
 oc create clusterquota user-qa --project-annotation-selector openshift.io/requester=myuser --hard pods=12,secrets=20
 ```
 
-Cluster Quota for all projects for a specific label (environment=qa)
+
+
+**Cluster Quota for all projects** for a specific label (environment=qa)
 
 ```
 oc create clusterquota env-qa --project-label-selector environment=qa --hard pods=10,services=5
 ```
+
+
 
 Delete a cluster quota
 
 ```
 oc delete clusterquota QUOTA
 ```
-
-
 
 
 
@@ -1122,6 +1124,12 @@ Limite Range for a container or a pod, an image, or a PVC.
 
 
 ## Scaling the Application
+
+Links
+
+#### Application Autoscale
+
+
 
 Deployment > Replicas > template > Containers 			`oc create deploy`
 
