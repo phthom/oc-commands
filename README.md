@@ -1,1 +1,1 @@
-# oc-commands
+# OpenShift Command Line (oc)
