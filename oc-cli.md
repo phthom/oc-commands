@@ -10,13 +10,13 @@
 
 Links:
 
-#### nodes/working-with-nodes  
+#### nodes > working-with-nodes  
 
 ```
 https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/html/nodes/working-with-nodes
 ```
 
-#### nodes/working-with-pods
+#### nodes > working-with-pods
 
 ```http
 https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/html/nodes/working-with-pods
@@ -347,7 +347,7 @@ oc edit deploy/mydeploy
 
 Links:
 
-#### authentication/configuring-identity-providers
+#### authentication > configuring-identity-providers
 
 ```
 https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/html/authentication/configuring-identity-providers
@@ -471,7 +471,7 @@ oc delete identity -all
 
 Links
 
-#### authentication/using-rbac
+#### authentication > using-rbac
 
 ```
 https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/html/authentication/using-rbac
@@ -575,7 +575,7 @@ oc new-app --name httpd httpd:2.4
 
 Links
 
-#### nodes-pods-secrets-about_nodes-pods-secrets
+#### Node > nodes-pods-secrets
 
 ```
 https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/html/nodes/working-with-pods#nodes-pods-secrets-about_nodes-pods-secrets
@@ -642,7 +642,7 @@ oc get pods -l app=myapp -w
 
 Links
 
-#### managing-pod-security-policies
+#### Authentication > Managing-pod-security-policies
 
 ```
 https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/html-single/authentication/index#managing-pod-security-policies
@@ -756,6 +756,8 @@ oc get pod podname -o yaml | oc adm policy scc-subject-review -f -
 
 Links
 
+#### Networking > Configuring Networking Policy
+
 ```
 https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/html-single/networking/index#configuring-networkpolicy
 ```
@@ -839,7 +841,7 @@ oc debug -t deployment/mysql --image registry.access.redhat.com/ubi8/ubi:8.0
 
 Links
 
-####Configuring Routes
+####Networking > Configuring Routes
 
 ```bash 
 https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/html-single/networking/index#configuring-routes
@@ -913,7 +915,7 @@ curl -vvI --cacert certs/training-CA.pem https://todo-https.${RHT_OCP4_WILDCARD_
 
 Links
 
-#### Node > Placement
+#### Nodes > Placement
 
 ```
 https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/html-single/nodes/index#nodes-pods-node-selectors
@@ -992,6 +994,10 @@ oc annotate namespace demo openshift.io/node-selector="tier=2" --overwrite
 
 
 ## Resource Usage and limits
+
+Links
+
+#### Applications > Limits
 
 Requests = minimum resources (cpu or memory) to run a POD on a node
 
@@ -1127,7 +1133,7 @@ Limite Range for a container or a pod, an image, or a PVC.
 
 Links
 
-#### Application Autoscale
+#### Applications > Autoscale
 
 
 
