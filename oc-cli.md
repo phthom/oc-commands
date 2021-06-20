@@ -8,21 +8,33 @@
 
 
 
-```bash
+Links:
+
+#### nodes/working-with-nodes  
+
+```
+https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/html/nodes/working-with-nodes
+```
+
+#### nodes/working-with-pods
+
+```http
+https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/html/nodes/working-with-pods
+```
+
+
+
+
+
+```
 oc get nodes
 
 NAME                    STATUS   ROLES           AGE    VERSION
 rhcert5.nca.ihost.com   Ready    master,worker   129d   v1.14.6-152-g117ba1f
-```
-
-```bash
 oc adm top nodes
 
 NAME                    CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%   
 rhcert5.nca.ihost.com   1556m        10%    8247Mi          26%   
-```
-
-```bash
 oc describe node mynode
 
 Name:               rhcert5.nca.ihost.com
@@ -58,22 +70,19 @@ Allocated resources:
   ephemeral-storage  0 (0%)        0 (0%)
   hugepages-2Mi      0 (0%)        0 (0%)
 Events:              <none>
-```
-
-```bash
 export kubeconfig=mypath
 ```
 
 
 
-```bash
+```
 oc login url -u kubeadmin -p password
 oc login -u admin -p password
 ```
 
 
 
-```sh
+```
 oc get clusterversion
 
 NAME      VERSION   AVAILABLE   PROGRESSING   SINCE   STATUS
@@ -82,7 +91,7 @@ version   4.2.36    True        False         129d    Cluster version is 4.2.36
 
 
 
-```bash
+```
 oc describe clusterversion
 
 Name:         version
@@ -111,7 +120,7 @@ Spec:
 
 
 
-```bash
+```
 oc get clusteroperators
 
 NAME                                       VERSION   AVAILABLE   PROGRESSING   DEGRADED   SINCE
@@ -147,7 +156,7 @@ storage                                    4.2.36    True        False         F
 
 
 
-```sh
+```
 oc adm node-logs -u crio mynode
 
 Data from the specified boot (-1) is not available: No such boot ID in journal
@@ -159,7 +168,7 @@ Jun 16 07:08:53 rhcert5.nca.ihost.com crio[2950]: 2021-06-16T07:08:53Z [verbose]
 
 
 
-```bash
+```
 oc adm node-logs -u kubelet mynode
 
 Jun 16 05:35:11 rhcert5.nca.ihost.com hyperkube[3036]: I0616 05:35:11.403249    3036 kubelet_pods.go:1346] Generating status for "network-operator-7fd8bbd68c-pbn9s_openshift-network-operator(9171e09e-6a16-11eb-898f-005056b57e23)"
@@ -168,7 +177,7 @@ Jun 16 05:35:11 rhcert5.nca.ihost.com hyperkube[3036]: I0616 05:35:11.403568    
 
 
 
-```bash
+```
 oc debug node/mynode
 
 Starting pod/rhcert5ncaihostcom-debug ...
@@ -192,7 +201,7 @@ c65f9b33cb0ea       245559d091f4f789e173a0866022df0c22e47d413d6ef3ad3892fa200721
 
 
 
-```bash
+```
 oc logs mypod -c mycontainer
 
 ---> Running application from Python script (app.py) ...
@@ -206,7 +215,7 @@ oc logs mypod -c mycontainer
 
 
 
-```sh
+```
 oc debug deploy/mydeploy --as-root
 
 Starting pod/loadtest-debug ...
@@ -222,7 +231,7 @@ If you don't see a command prompt, try pressing enter.
 
 
 
-```sh
+```
 oc rsh mypod
 
 (app-root)sh-4.2$ ps -efa
@@ -234,28 +243,28 @@ UID          PID    PPID  C STIME TTY          TIME CMD
 
 
 
-```sh
+```
 oc cp myfile mypod:mypath
 
 ```
 
 
 
-```sh
+```
 oc port-forward mypod localport:remoteport
 
 ```
 
 
 
-```sh
+```
 oc get pods --log-level 6
 
 ```
 
 
 
-```sh
+```
 oc whoami
 oc whoami -t
 
@@ -263,7 +272,7 @@ oc whoami -t
 
 
 
-```sh
+```
 oc adm top  nodes -l node-role.kubernetes.io/master= 
 
 NAME                    CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%   
@@ -272,7 +281,7 @@ rhcert5.nca.ihost.com   1416m        9%     8301Mi          26%
 
 
 
-```sh
+```
 oc logs --tail 5 -n myspace mypod -c mycontainer
 
  * Environment: production
@@ -285,7 +294,7 @@ oc logs --tail 5 -n myspace mypod -c mycontainer
 
 
 
-```sh
+```
 oc debug node/mynode
 systemctl status kubelet
 systemctl status cri-o
@@ -294,7 +303,7 @@ crictl ps --name openvswitch
 
 
 
-```sh
+```
 oc new-project myproject
 oc project myproject
 oc status
@@ -302,7 +311,7 @@ oc status
 
 
 
-```sh
+```
 oc get events
 
 LAST SEEN   TYPE      REASON                         OBJECT                             MESSAGE
@@ -318,13 +327,13 @@ LAST SEEN   TYPE      REASON                         OBJECT                     
 
 Find an image in a registry
 
-```sh
-spokeo inspect docker://registry.access.redhat.com/... 
+```
+skopeo inspect docker://registry.access.redhat.com/... 
 ```
 
 
 
-```sh
+```
 yum install nano
 export EDITOR=nano
 oc edit deploy/mydeploy
@@ -336,13 +345,23 @@ oc edit deploy/mydeploy
 
 
 
+Links:
+
+#### authentication/configuring-identity-providers
+
+```
+https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/html/authentication/configuring-identity-providers
+```
+
+
+
 Examples: htpasswd, keystone, OpenLDAP, GitHub, activeDirectory ...
 
 
 
 Authentication with X509 certificate in a auth directory
 
-```sh
+```
 export KUBECONFIG=/home/user/auth/kubeconfig
 oc get nodes
 ```
@@ -351,7 +370,7 @@ oc get nodes
 
 Authentication with a virtual user
 
-```sh
+```
 oc login -u kubeadmin -p shdU_trbi_6ucX_edbu_aqop
 oc delete secret kubeadmin -n kube-system
 ```
@@ -360,7 +379,7 @@ oc delete secret kubeadmin -n kube-system
 
 Get the OAuth custom resource
 
-```sh
+```
 oc get -o yaml oauth cluster > oauth.yaml
 
 apiVersion: config.openshift.io/v1
@@ -389,7 +408,7 @@ spec:
 
 Locally define/modify/delete htpasswd file
 
-```bash
+```
 yum install htpasswd -y
 htpasswd -c -B -b htpasswd newuser redhat123
 htpasswd -b htpasswd existinguser redhat1234
@@ -408,7 +427,7 @@ oc create secret generic htp-secret --from-file htpasswd=/home/user/htpasswd -n 
 
 Listing the secret:
 
-```sh 
+```
 oc extract secret/htp-secret -n openshift-config --to - > temp
 cat temp
 htpasswd -D temp manager
@@ -420,7 +439,7 @@ oc delete identity manager
 
 After Changing the htpasswd file, you must update the secret
 
-```sh
+```
 oc create secret generic htp-secret --from-file htpasswd=/path/to/your/file --dry-run -o yaml | oc replace -n openshift-config -f -
 ```
 
@@ -428,7 +447,7 @@ oc create secret generic htp-secret --from-file htpasswd=/path/to/your/file --dr
 
 Associate cluster admin privileges to a new user:
 
-```sh
+```
 oc adm policy add-cluster-role-to-user cluster-admin newuser
 ```
 
@@ -436,7 +455,7 @@ oc adm policy add-cluster-role-to-user cluster-admin newuser
 
 Listing users, identities, ...
 
-```sh
+```
 oc get users
 oc get identity
 oc edit oauth
@@ -450,11 +469,21 @@ oc delete identity -all
 
 
 
+Links
+
+#### authentication/using-rbac
+
+```
+https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/html/authentication/using-rbac
+```
+
+
+
 Resources (pods, service ...) <--- Role (get, list, delete ...) <--- Binding ---> Entity (user, group sa)
 
 Roles: Cluster roles or Local roles
 
-```sh
+```
 oc adm policy who-can delete user
 ```
 
@@ -472,7 +501,7 @@ Roles:
 
 
 
-```sh
+```
 oc get clusterrolebinding -o wide | grep -E 'NAME|self-provisioner'
 
 NAME                                                                              AGE
@@ -481,7 +510,7 @@ self-provisioners                                                               
 
 
 
-```sh
+```
 oc describe clusterrolebindings self-provisioners
 
 Name:         self-provisioners
@@ -500,39 +529,39 @@ Subjects:
 
 Remove self-provisioner cluster role from group **system:authenticated:oauth**
 
-```sh
+```
 oc adm policy remove-cluster-role-from-group self-provisioner system:authenticated:oauth
 ```
 
 
 
-```sh
+```
 oc policy add-role-to-user admin myuser
 ```
 
 
 
-```sh
-oc admn groups new mygroup
+```
+oc adm groups new mygroup
 ```
 
 
 
-```sh
+```
 oc admn groups add-users mygroup myuser
 oc get groups
 ```
 
 
 
-```sh
+```
 oc policy add-role-to-group edit mygroup
 oc policy add-role-to-group view mygroup
 ```
 
 
 
-```sh 
+```
 oc new-app --name httpd httpd:2.4
 ```
 
@@ -544,15 +573,27 @@ oc new-app --name httpd httpd:2.4
 
 
 
+Links
+
+#### nodes-pods-secrets-about_nodes-pods-secrets
+
+```
+https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/html/nodes/working-with-pods#nodes-pods-secrets-about_nodes-pods-secrets
+```
+
+
+
+
+
 Create a secret from literals
 
-```sh
+```
 oc create secret generic secret_name --from-literal key1=secret1 --from-literal key2=secret2
 ```
 
 Create secret from file to sa
 
-``` sh
+```
 oc secrets add --for mount serviceaccount/serviceaccount-name secret/secret_name
 ```
 
@@ -560,7 +601,7 @@ oc secrets add --for mount serviceaccount/serviceaccount-name secret/secret_name
 
 Expose a secret in a POD
 
-```sh
+```
 env:
   - name: MYSQL_ROOT_PASSWORD
     valueFrom:
@@ -571,15 +612,15 @@ env:
 
 or with oc command
 
-```sh
-oc set env dc/demo --from=secret/demo-secret
+```
+oc set env dc/demo --from=secret/demo-secret --prefix MYPREF
 ```
 
 
 
 Create a new-app **deploymentConfig**
 
-```sh
+```
 oc new-app --name myapp --docker-image registry.access.redhat.com/rhscl/mysql-57-rhel7:5.7-47
 ```
 
@@ -587,7 +628,7 @@ oc new-app --name myapp --docker-image registry.access.redhat.com/rhscl/mysql-57
 
 List all pods for a label with the **watch** option:
 
-```sh
+```
 oc get pods -l app=myapp -w
 ```
 
@@ -599,9 +640,21 @@ oc get pods -l app=myapp -w
 
 
 
+Links
+
+#### managing-pod-security-policies
+
+```
+https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/html-single/authentication/index#managing-pod-security-policies
+```
+
+
+
+
+
 List all SCC
 
-```sh
+```
 oc get scc
 
 NAME               AGE
@@ -619,50 +672,50 @@ restricted         129d
 
 Describe a specific SCC
 
-```sh
+```
 oc describe scc anyuid
 
-Name:						anyuid
-Priority:					10
-Access:						
-  Users:					<none>
-  Groups:					system:cluster-admins
-Settings:					
-  Allow Privileged:				false
-  Allow Privilege Escalation:			true
-  Default Add Capabilities:			<none>
-  Required Drop Capabilities:			MKNOD
-  Allowed Capabilities:				<none>
-  Allowed Seccomp Profiles:			<none>
-  Allowed Volume Types:				configMap,downwardAPI,emptyDir,persistentVolumeClaim,projected,secret
-  Allowed Flexvolumes:				<all>
-  Allowed Unsafe Sysctls:			<none>
-  Forbidden Sysctls:				<none>
-  Allow Host Network:				false
-  Allow Host Ports:				false
-  Allow Host PID:				false
-  Allow Host IPC:				false
-  Read Only Root Filesystem:			false
-  Run As User Strategy: RunAsAny		
-    UID:					<none>
-    UID Range Min:				<none>
-    UID Range Max:				<none>
-  SELinux Context Strategy: MustRunAs		
-    User:					<none>
-    Role:					<none>
-    Type:					<none>
-    Level:					<none>
-  FSGroup Strategy: RunAsAny			
-    Ranges:					<none>
-  Supplemental Groups Strategy: RunAsAny	
-    Ranges:					<none>
+Name:                       anyuid
+Priority:                   10
+Access:                     
+  Users:                    <none>
+  Groups:                   system:cluster-admins
+Settings:                   
+  Allow Privileged:             false
+  Allow Privilege Escalation:           true
+  Default Add Capabilities:         <none>
+  Required Drop Capabilities:           MKNOD
+  Allowed Capabilities:             <none>
+  Allowed Seccomp Profiles:         <none>
+  Allowed Volume Types:             configMap,downwardAPI,emptyDir,persistentVolumeClaim,projected,secret
+  Allowed Flexvolumes:              <all>
+  Allowed Unsafe Sysctls:           <none>
+  Forbidden Sysctls:                <none>
+  Allow Host Network:               false
+  Allow Host Ports:             false
+  Allow Host PID:               false
+  Allow Host IPC:               false
+  Read Only Root Filesystem:            false
+  Run As User Strategy: RunAsAny        
+    UID:                    <none>
+    UID Range Min:              <none>
+    UID Range Max:              <none>
+  SELinux Context Strategy: MustRunAs       
+    User:                   <none>
+    Role:                   <none>
+    Type:                   <none>
+    Level:                  <none>
+  FSGroup Strategy: RunAsAny            
+    Ranges:                 <none>
+  Supplemental Groups Strategy: RunAsAny    
+    Ranges:                 <none>
 ```
 
 
 
 Create a Sarvice Account (sa)
 
-```sh
+```
 oc create sa saname
 ```
 
@@ -670,15 +723,26 @@ oc create sa saname
 
 Associate a SCC to a SA:
 
-```sh
-oc adm policy add-scc-to-user myscc -z service-account
 ```
+oc adm policy add-scc-to-user myscc -z saname
+```
+
+
+
+Assign SA to a POD
+
+```bash
+oc set serviceaccount deploymentconfig mydc saname
+oc set sa deploy mydeploy saname
+```
+
+
 
 
 
 Look at the SCC associated to a pod
 
-```sh
+```
 oc get pod podname -o yaml | oc adm policy scc-subject-review -f -
 ```
 
@@ -690,7 +754,17 @@ oc get pod podname -o yaml | oc adm policy scc-subject-review -f -
 
 
 
-```sh
+Links
+
+```
+https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/html-single/networking/index#configuring-networkpolicy
+```
+
+
+
+
+
+```
 oc get svc
 
 NAME       TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
@@ -701,7 +775,7 @@ loadtest   ClusterIP   172.30.148.181   <none>        80/TCP    28h
 
 DNS Operator
 
-```sh
+```
 oc describe dns.operator/default
 ```
 
@@ -709,8 +783,8 @@ oc describe dns.operator/default
 
 Cluster Network Operator
 
-```sh
-oc get Network.config.openshift.io cluster -oyaml
+```
+oc get Network.config.openshift.io cluster -o yaml
 
 apiVersion: config.openshift.io/v1
 kind: Network
@@ -745,7 +819,7 @@ status:
 
 Retreive IP addresses:
 
-```sh
+```
 oc get service/frontend -o jsonpath="{.spec.clusterIP}{'\n'}"
 ```
 
@@ -753,13 +827,25 @@ oc get service/frontend -o jsonpath="{.spec.clusterIP}{'\n'}"
 
 Debuging
 
-```sh
+```
 oc debug -t deployment/mysql --image registry.access.redhat.com/ubi8/ubi:8.0
 ```
 
 
 
+
+
 # Routes
+
+Links
+
+####Configuring Routes
+
+```bash 
+https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/html-single/networking/index#configuring-routes
+```
+
+
 
 HTTP, HTTPS, SNI, TLSwith SNI
 
@@ -773,23 +859,27 @@ Secure Routes :
 
 Insecure Routes
 
-```sh
+```
 oc expose service api-frontend --hostname api.apps.acme.com
+
+oc create secret tls todo-certs --cert=certs/training.crt --key=certs/training.key
 ```
 
 
 
 Securing Applications at the edge
 
-```sh
-oc create route edge --service api-frontend --api.apps.acme.com --key api.key --cert api.crt
+```
+oc create route edge myroute --service myservice --hostname --api.apps.acme.com --key api.key --cert api.crt
+
+oc create route passthrough todo-https --service todo-https --port 8443 --hostname todo-https.domain.com
 ```
 
 
 
 Anaysing the network trafic
 
-```sh
+```
 ip a | grep 172.25.250.9
 
 sudo tcpdump -i ens3 -A -n port 80 | grep js
@@ -803,13 +893,17 @@ curl -I -v --cacert tls.crt https://todo-https.com
 
 Etapes pour la gestion des certificats:
 
-```sh
+```
 openssl genrsa -out training.key 2048
 
-openssl req -new -subj "/C=US/ST=North Carolina/L=Raleigh/O=Red Hat/\ > CN=todo https.com" -key training.key -out training.csr
+openssl req -new -subj "/C=US/ST=North Carolina/L=Raleigh/O=Red Hat/CN=todo https.com" -key training.key -out training.csr
 
 openssl x509 -req -in training.csr -passin file:passphrase.txt -CA training-CA.pem -CAkey training-CA.key -CAcreateserial -out training.crt -days 1825 -sha256 -extfile training.ext
+
+curl -vvI --cacert certs/training-CA.pem https://todo-https.${RHT_OCP4_WILDCARD_DOMAIN}
 ```
+
+
 
 
 
@@ -817,7 +911,21 @@ openssl x509 -req -in training.csr -passin file:passphrase.txt -CA training-CA.p
 
 
 
-```sh
+Links
+
+#### Node > Placement
+
+```
+https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/html-single/nodes/index#nodes-pods-node-selectors
+```
+
+
+
+
+
+
+
+```
 oc get node mypod --show-labels
 
 NAME                    STATUS   ROLES           AGE    VERSION                LABELS
@@ -826,33 +934,33 @@ rhcert5.nca.ihost.com   Ready    master,worker   129d   v1.14.6-152-g117ba1f   b
 
 
 
-```sh
-oc get node -l env
+```
+oc get node -l env=prod
 ```
 
 
 
 Labelling nodes
 
-```sh
+```
 oc label node mynode env=dev --overwrite
 oc label node mynode env-
 ```
 
 
 
-Node Selector
+Node List
 
-```sh
+```
 oc get node mynode --show-labels
 oc get node -L failure-domain.beta.kubernetes.io/region
 ```
 
 
 
-Controlling POD placement 
+Controlling POD placement with Node Selector
 
-```sh
+```
   template:
     metadata:
       creationTimestamp: null
@@ -869,13 +977,13 @@ Controlling POD placement
 
 Configuring a Node Selector for a Project creation
 
-```sh
+```
 oc adm new-project demo --node-selector "tier=1"
 ```
 
 or after project creation
 
-```sh
+```
 oc annotate namespace demo openshift.io/node-selector="tier=2" --overwrite
 ```
 
@@ -889,7 +997,7 @@ Requests = minimum resources (cpu or memory) to run a POD on a node
 
 Limits = maximum limit to run a pod in a node
 
-```sh
+```
     spec:
       containers:
       - image: quay.io/redhattraining/hello-world-nginx:v1.0
@@ -905,7 +1013,7 @@ Limits = maximum limit to run a pod in a node
 
 or
 
-```sh
+```
 oc set resources deploy mydeploy --requests cpu=10m,memory=20Mi --limits cpu=80m,memory=100Mi
 ```
 
@@ -913,7 +1021,7 @@ oc set resources deploy mydeploy --requests cpu=10m,memory=20Mi --limits cpu=80m
 
 Resource list for a node
 
-```sh 
+```
 oc describe node mynode
 ```
 
@@ -921,22 +1029,34 @@ oc describe node mynode
 
 Statistics for all nodes
 
-```sh
+```
 oc adm top nodes -l myworkernode
 oc adm top pods
 ```
 
 
 
+
+
 ## Quotas
 
-| Resource                  | Quota                                    |
-| ------------------------- | ---------------------------------------- |
-| pods                      | Total number of pods                     |
-| `replicationcontrollers ` | Total number of replication controllers  |
-| services                  | Total number of services                 |
-| secrets                   | Total number of secrets                  |
-| `persistentvolumeclaims ` | Total number of persistent volume claims |
+Links
+
+#### Applications > Quotas
+
+```
+https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/html-single/applications/index#quotas
+```
+
+
+
+| Resource                 | Quota                                    |
+| ------------------------ | ---------------------------------------- |
+| pods                     | Total number of pods                     |
+| `replicationcontrollers` | Total number of replication controllers  |
+| services                 | Total number of services                 |
+| secrets                  | Total number of secrets                  |
+| `persistentvolumeclaims` | Total number of persistent volume claims |
 
 | Resource                   | Quota                                                        |
 | -------------------------- | ------------------------------------------------------------ |
@@ -948,7 +1068,7 @@ oc adm top pods
 
 Resource Quota for the scope for a project
 
-```sh
+```
 oc create quota dev-quota --hard services=10,cpu=1300,memory=1.5Gi
 oc describe quota
 oc delete resourcequota QUOTA
@@ -958,23 +1078,21 @@ oc delete resourcequota QUOTA
 
 **Cluster Quota** for all projects owned by myuser
 
-```sh
+```
 oc create clusterquota user-qa --project-annotation-selector openshift.io/requester=myuser --hard pods=12,secrets=20
 ```
 
 Cluster Quota for all projects for a specific label (environment=qa)
 
-```sh
+```
 oc create clusterquota env-qa --project-label-selector environment=qa --hard pods=10,services=5
 ```
 
 Delete a cluster quota
 
-```sh
+```
 oc delete clusterquota QUOTA
 ```
-
-
 
 
 
@@ -986,10 +1104,7 @@ oc delete clusterquota QUOTA
 
 Limits for a single container or a pod
 
-To understand the difference between a limit range and a resource quota, consider that a limit
-range defines valid ranges and default values for a single pod, and a resource quota defines only
-top values for the sum of all pods in a project. A cluster administrator concerned about resource
-usage in an OpenShift cluster usually defines both limits and quotas for a project.
+To understand the difference between a limit range and a resource quota, consider that a limit range defines valid ranges and default values for a single pod, and a resource quota defines only top values for the sum of all pods in a project. A cluster administrator concerned about resource usage in an OpenShift cluster usually defines both limits and quotas for a project.
 
 Limite Range for a container or a pod, an image, or a PVC.
 
@@ -1006,7 +1121,7 @@ Limite Range for a container or a pod, an image, or a PVC.
 
 
 
-##  Scaling the Application
+## Scaling the Application
 
 Deployment > Replicas > template > Containers 			`oc create deploy`
 
@@ -1016,7 +1131,7 @@ DeploymentConfig > Replicas > Template > Selector 		`oc new-app`
 
 Manual
 
-```sh
+```
 oc scale --replicas 3 deploy/myname
 oc scale --replicas 3 dc/myname
 ```
@@ -1025,17 +1140,21 @@ oc scale --replicas 3 dc/myname
 
 Automatic 
 
-```sh
+```
 oc autoscale dc/myname --min 1 --max 10 --cpu-percent 80
 oc autoscale deploy/myname --min 1 --max 10 --cpu-percent 80
 ```
 
 List all autoscalers
 
-```sh
+```
 oc get hpa
 oc delete hpa myname
 ```
+
+ 
+
+
 
 
 
